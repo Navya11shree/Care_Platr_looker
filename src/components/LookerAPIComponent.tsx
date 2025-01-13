@@ -1,4 +1,4 @@
-//looker api for all dashboards in folder in TABLE  FORMAT
+//LookerAPIComponent.tsx , looker api for all dashboards from looker user in folder in TABLE  FORMAT
 import React, { useState, useContext, useEffect } from 'react';
 import { ExtensionContext } from '@looker/extension-sdk-react';
 import { IDashboard } from '@looker/sdk';

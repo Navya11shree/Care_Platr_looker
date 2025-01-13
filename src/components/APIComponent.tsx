@@ -1,6 +1,6 @@
 
 //using component that has two buttons - one using the Looker extension SDK and another using the regular fetch API.
-//APIComponent.tsx
+//APIComponent.tsx of calling  external api
 import React, { useState, useContext } from 'react';
 import { ExtensionContext } from '@looker/extension-sdk-react';
 

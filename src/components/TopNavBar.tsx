@@ -1,5 +1,5 @@
-//TopNavBar.tsx
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Avatar from 'react-avatar';
 import { ExtensionContext } from '@looker/extension-sdk-react';
 import NotificationComponent from './NotificationComponent';
@@ -12,7 +12,11 @@ interface UserDetails {
   display_name: string | null;
 }
 
-const TopNavBar: React.FC = () => {
+interface TopNavBarProps {
+  setIsAuthenticated: (value: boolean) => void;
+}
+
+const TopNavBar: React.FC<TopNavBarProps> = ({ setIsAuthenticated }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [userDetails, setUserDetails] = useState<UserDetails>({
     first_name: null,
@@ -21,6 +25,7 @@ const TopNavBar: React.FC = () => {
     display_name: null
   });
   const extensionContext = React.useContext(ExtensionContext);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -49,6 +54,12 @@ const TopNavBar: React.FC = () => {
     const firstName = userDetails.first_name || '';
     const lastName = userDetails.last_name || '';
     return firstName && lastName ? `${firstName} ${lastName}` : 'User';
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setIsProfileOpen(false);
+    history.push('/login');
   };
 
   return (
@@ -82,12 +93,20 @@ const TopNavBar: React.FC = () => {
               {userDetails.email || 'N/A'}
             </p>
           </div>
-          <button
-            onClick={() => setIsProfileOpen(false)}
-            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-          >
-            Close
-          </button>
+          <div className="mt-4 space-y-2">
+            <button
+              onClick={() => setIsProfileOpen(false)}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+            >
+              Close
+            </button>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       )}
     </div>

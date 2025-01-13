@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CiHome } from 'react-icons/ci';
 import { MdExplore, MdGridView } from 'react-icons/md';
-import { BsChat } from 'react-icons/bs';
 import { FiUser } from 'react-icons/fi';
 import { CgFileDocument } from 'react-icons/cg';
 import { TbApi } from 'react-icons/tb';
