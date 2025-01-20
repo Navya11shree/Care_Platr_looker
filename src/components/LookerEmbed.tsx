@@ -29,10 +29,9 @@ const LookerEmbed: React.FC<EmbedProps> = ({ folderId }) => {
           { type: 'look', items: looks }
         ]);
 
-        // Automatically load "Dashboard 1" if available
-        const dashboard1 = dashboards.find((dashboard: any) => dashboard.title === 'dashboard1');
-        if (dashboard1) {
-          setSelectedContent(`dashboards/${dashboard1.id}`);
+        // Automatically load the first dashboard if available
+        if (dashboards && dashboards.length > 0) {
+          setSelectedContent(`dashboards/${dashboards[0].id}`);
         }
       } catch {
         setError('Failed to fetch folder contents. Please try again.');
@@ -95,7 +94,7 @@ const LookerEmbed: React.FC<EmbedProps> = ({ folderId }) => {
             className="border-none"
             title="Looker Embed"
             allowFullScreen
-            style={{ height: '85vh', width: '75vw' }} // Adjusted size: height 85% of viewport height, width 75% of viewport width
+            style={{ height: '85vh', width: '75vw' }}
           />
           <button
             onClick={handleClose}
